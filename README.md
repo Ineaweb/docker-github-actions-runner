@@ -7,11 +7,11 @@
 
 Based on Ubuntu :
 
-[![Build Status](https://dev.azure.com/pmorisseau/AzDOEphemeralAgentBuilder/_apis/build/status/Ineaweb.docker-azure-pipelines-agent-ubuntu?branchName=master)](https://dev.azure.com/pmorisseau/AzDOEphemeralAgentBuilder/_build/latest?definitionId=78&branchName=master)
+[![Build Status](https://dev.azure.com/pmorisseau/ActionsRunnerEphemeralAgentBuilder/_apis/build/status/Ineaweb.docker-github-actions-runner.linux?branchName=main)](https://dev.azure.com/pmorisseau/ActionsRunnerEphemeralAgentBuilder/_build/latest?definitionId=84&branchName=main)
 
 Based on Windows : 
 
-[![Build Status](https://dev.azure.com/pmorisseau/AzDOEphemeralAgentBuilder/_apis/build/status/Ineaweb.docker-azure-pipelines-agent-windows?branchName=master)](https://dev.azure.com/pmorisseau/AzDOEphemeralAgentBuilder/_build/latest?definitionId=79&branchName=master)
+[![Build Status](https://dev.azure.com/pmorisseau/ActionsRunnerEphemeralAgentBuilder/_apis/build/status/Ineaweb.docker-github-actions-runner.windows?branchName=main)](https://dev.azure.com/pmorisseau/ActionsRunnerEphemeralAgentBuilder/_build/latest?definitionId=85&branchName=main)
 
 This is a Docker based project for automatically generating docker images for Github Actions Runner with specified Versions. The resulting Docker images should be used as a base for project specific agents that are customized to the needs for the pipeline in your project.
 
