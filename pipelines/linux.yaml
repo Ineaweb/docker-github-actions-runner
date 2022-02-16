@@ -1,0 +1,41 @@
+trigger:
+- master
+
+jobs:
+- job: Linux
+  displayName: 'Build linux images'
+  pool:
+    vmImage: 'ubuntu-latest'
+  workspace:
+    clean: all
+  variables:
+    workingDirectory: '$(Build.SourcesDirectory)/linux/'
+  steps:
+  - task: Bash@3
+    displayName: 'Build images'
+    inputs:
+      targetType: 'inline'
+      script: |
+        cd $(workingDirectory)
+        chmod 777 *.sh
+        ./build.sh
+      workingDirectory: $(workingDirectory)
+
+  - task: Docker@2
+    displayName: 'Docker Login'
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    inputs:
+      containerRegistry: 'pmorisseau Docker Hub'
+      command: 'login'
+      addPipelineData: false
+      
+  - task: Bash@3     
+    displayName: 'Push images'
+    inputs:
+      targetType: 'inline'
+      script: |
+        cd $(workingDirectory)
+        ./push.sh
+      workingDirectory: $(workingDirectory)
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    

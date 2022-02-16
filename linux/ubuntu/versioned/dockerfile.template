@@ -1,0 +1,22 @@
+FROM $[DOCKER_REGISTRY]/$[DOCKER_NAME]:ubuntu-$[UBUNTU_VERSION]
+
+LABEL name="$[DOCKER_REGISTRY]/$[DOCKER_NAME]:ubuntu-$[UBUNTU_VERSION]-$[AZDO_AGENT_VERSION]" \
+      maintainer="Pmorisseau - CodeZ.one - Kirsten Kluge" \
+      version="0.1.0"
+
+COPY ./runAgent.sh /actions-runner/
+
+RUN chmod +x /actions-runner/runAgent.sh \
+ && set -x \
+ && cd /actions-runner \
+ && curl -s -fSL https://github.com/actions/runner/releases/download/v$[AZDO_AGENT_VERSION]/actions-runner-linux-x64-$[AZDO_AGENT_VERSION].tar.gz -o agent.tgz \
+ && mkdir agent \
+ && cd agent \
+ && tar -xzf ../agent.tgz \
+ && chown -R root:root . \
+ && cd .. \
+ && rm agent.tgz
+
+RUN /actions-runner/agent/bin/installdependencies.sh
+
+CMD ["/actions-runner/runAgent.sh"]

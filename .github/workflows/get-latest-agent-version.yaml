@@ -1,0 +1,24 @@
+name: Get latest github action runner version
+on:
+  schedule:
+    - cron:  '0 0 * * *'
+jobs:
+  get-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Fetch release version
+        run: |
+          curl -sL https://api.github.com/repos/actions/runner/releases/latest | \
+          jq -r ".tag_name" | sed 's/^v\(.*\)$/\1/' > latest-agent-version
+      - name: Check for modified files
+        id: git-check
+        run: echo ::set-output name=modified::$([ -z "`git status --porcelain latest-agent-version`" ] && echo "false" || echo "true")
+      - name: Commit latest release version
+        if: steps.git-check.outputs.modified == 'true'
+        run: |
+          ./update-latest-agent-version.sh 
+          git config --global user.name 'Ineaweb Bot'
+          git config --global user.email '9535367+Ineaweb@users.noreply.github.com'
+          git commit -am "Update github action runner version"
+          git push
