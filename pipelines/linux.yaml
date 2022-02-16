@@ -23,7 +23,7 @@ jobs:
 
   - task: Docker@2
     displayName: 'Docker Login'
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     inputs:
       containerRegistry: 'pmorisseau Docker Hub'
       command: 'login'
@@ -37,5 +37,5 @@ jobs:
         cd $(workingDirectory)
         ./push.sh
       workingDirectory: $(workingDirectory)
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     
