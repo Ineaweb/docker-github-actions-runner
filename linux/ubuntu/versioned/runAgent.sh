@@ -37,6 +37,11 @@ if [ -n "$ActionsRunner_POOL" ]; then
   arg_pool="--runnergroup "${ActionsRunner_POOL}""
 fi
 
+arg_labels=
+if [ -n "$ActionsRunner_LABELS" ]; then
+  arg_labels="--labels "${ActionsRunner_LABELS}""
+fi
+
 arg_agent_once=
 if [ "$ActionsRunner_DISPOSE" = true ]; then
   env_include+=( "Agent.RunOnce=true" )
@@ -86,6 +91,7 @@ print_message "Configure Agent ..."
   ${arg_pool} \
   --work ${ActionsRunner_WORK:-_work} \
   ${arg_agent_once} \
+  ${arg_labels} \
   --replace & wait $!
 
 print_message "    Done."

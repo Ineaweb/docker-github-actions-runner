@@ -33,6 +33,11 @@ Begin {
         $argpool = "--runnergroup $env:ActionsRunner_POOL "
     }
 
+    $arglabels = ""
+    if ($env:ActionsRunner_LABELS) {
+        $arglabels = "--labels $env:ActionsRunner_LABELS "
+    }    
+
     function Cleanup () {
         if (Test-Path ".\config.cmd") {
             Invoke-Expression "& .\config.cmd remove --unattended $argagentauth"
@@ -43,7 +48,7 @@ Begin {
 Process {
     Write-Output "Configure Agent ..."
 
-    $addcommand = "& .\config.cmd --unattended --url $env:ActionsRunner_URL --token $env:ActionsRunner_TOKEN --name $env:ActionsRunner_AGENT --work $env:ActionsRunner_WORK $argpool $argagentonce"
+    $addcommand = "& .\config.cmd --unattended --url $env:ActionsRunner_URL --token $env:ActionsRunner_TOKEN --name $env:ActionsRunner_AGENT --work $env:ActionsRunner_WORK $argpool $arglabels $argagentonce"
     Write-Output $addcommand
 
     try {

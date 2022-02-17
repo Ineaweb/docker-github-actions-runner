@@ -33,6 +33,8 @@ Agents can be further configured with additional environment variables:
 -   `ActionsRunner_AGENT`: the name of the agent (default: `"$(hostname)"`)
 -   `ActionsRunner_POOL`: the name of the agent pool (default: `"Default"`)
 -   `ActionsRunner_WORK`: the agent work folder (default: `"_work"`)
+-   `ActionsRunner_LABELS`: the agent labels
+
 
 The `ActionsRunner_AGENT` and `ActionsRunner_WORK` values are evaluated inside the container as an expression so they can use shell expansions. The `ActionsRunner_AGENT` value is evaluated first, so the `ActionsRunner_WORK` value may reference the expanded `ctionsRunner_AGENT` value.
 
@@ -75,7 +77,11 @@ The Name of the Agent as it will appear in the agent pool view of Github Actions
 
 `ActionsRunner_WORK`
 
-If you want the agent to use an other forlder for his jobs you can specify it here. The default is: `/azdo/agent/_work/`
+If you want the agent to use an other forlder for his jobs you can specify it here. The default is: `/actionsrunner/agent/_work/`
+
+`ActionsRunner_LABELS`
+
+If you want the agent to specify custom labels to filter the runner in github actions workflow. 
 
 `ActionsRunner_ENV_IGNORE`
 
