@@ -2,9 +2,7 @@ name: Get latest github action runner version
 on:
   schedule:
     - cron:  '0 0 * * *'
-  push:
-    branches:
-    - main
+
 jobs:
   get-version:
     runs-on: ubuntu-latest
