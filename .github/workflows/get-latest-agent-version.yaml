@@ -20,6 +20,7 @@ jobs:
       - name: Commit latest release version
         if: steps.git-check.outputs.modified == 'true'
         run: |
+          sudo ./update-latest-agent-version.sh 
           git config --global user.name 'Ineaweb Bot'
           git config --global user.email '9535367+Ineaweb@users.noreply.github.com'
           git commit -am "Update github action runner version"
