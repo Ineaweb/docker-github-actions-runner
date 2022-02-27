@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+#set -e
 echo "coucou" 
 latest=$(cat ./latest-agent-version)
 echo "$latest" 
