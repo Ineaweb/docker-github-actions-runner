@@ -1,8 +1,7 @@
 #!/bin/bash
-#set -e
-echo "coucou" 
+set -e
+
 latest=$(cat ./latest-agent-version)
-echo "$latest" 
 
 shopt -s globstar
 for file in ./linux/**/releases; do
